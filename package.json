@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://tarynbillie.github.io/toronto-waste",
   "dependencies": {
+    "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",

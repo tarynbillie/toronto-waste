@@ -1,24 +1,29 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import magnifyer from '../../assets/search.svg';
+import Mag from '../../assets/search.js';
 
 
 export default class SearchBar extends Component {
   render() {
     return (
-        <Wrapper>
-            <Input type='text' name='search'/>
+        <Wrapper> 
+            <Input type='text' name='search' />
             <Search>
-                <Mag src={magnifyer} alt='magnifyer'/>
+                <Mag />
             </Search>
         </Wrapper>
     )
   }
 }
 
-const Wrapper = styled.div`
+const Flex = styled.div`
     display: flex;
-    justify-content: space-evenly;
+    ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent}`};
+`;
+
+const Wrapper = styled(Flex).attrs({
+    justifyContent: 'space-evenly'
+})`
     position: fixed;
     width: 100%;
     margin-top: 1rem;
@@ -42,11 +47,16 @@ const Search = styled.button`
     border-radius: 3px;
     outline: none;
     cursor: pointer;
+
+    svg {
+        fill: white;
+        transform: rotate(-270deg);
+    }
 `;
 
-const Mag = styled.img`
-    transform: rotate(-270deg);
-    width: 100%;
-    height: auto;
-    fill: white;
-`;
+// const Mag = styled.svg`
+//     transform: rotate(-270deg);
+//     width: 100%;
+//     height: auto;
+//     fill: white;
+// `;
