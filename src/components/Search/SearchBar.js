@@ -1,22 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import Mag from '../../assets/search.js';
+import Mag from '../../assets/searchSvg.js';
 
 
-export default class SearchBar extends Component {
-  render() {
-    return (
-        <Wrapper> 
-            <Input type='text' name='search' />
-            <Search>
-                <Mag />
-            </Search>
-        </Wrapper>
-    )
-  }
-}
 
-const Flex = styled.div`
+
+const SearchBar = ({ keyword, handleSearch, handleChange }) => (
+
+    <Wrapper>
+        <Input type='search' name='keyword' value={keyword} onChange={(e) => handleChange(e)} />
+        <Search  onClick={(e) => handleSearch(e)}>
+            <Mag />
+        </Search> 
+    </Wrapper>
+);
+
+
+export default SearchBar;
+
+const Flex = styled.form`
     display: flex;
     ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent}`};
 `;
@@ -24,18 +26,17 @@ const Flex = styled.div`
 const Wrapper = styled(Flex).attrs({
     justifyContent: 'space-evenly'
 })`
-    position: fixed;
     width: 100%;
     margin-top: 1rem;
 `;
 
 const Input = styled.input`
     width: 93%;
-    height: 2.5rem;
+    height: 2.8rem;
     padding-left: 0.8rem;
     font-size: 18px;
     border-radius: 2px;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(201, 201, 201);
     outline: none;
 `;
 
@@ -43,7 +44,7 @@ const Search = styled.button`
     display: flex;
     height: 2.8rem;
     width: 2.9rem;
-    background-color: #009459;
+    background-color: rgb(0, 148, 89);
     border-radius: 3px;
     outline: none;
     cursor: pointer;

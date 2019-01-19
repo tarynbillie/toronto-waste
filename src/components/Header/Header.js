@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { flexCenter } from '../../util/styles/mixins'
 
 
-export default class Header extends Component {
-  render() {
-    return (
-      <Banner>
-        <Title>Toronto Waste Lookup</Title>
-      </Banner>
-    )
-  }
-}
+const Header = () =>
+  <Banner>
+    <Title>Toronto Waste Lookup</Title>
+  </Banner>;
+
+
+export default Header;
 
 const Title = styled.h1`
-    text-align: center;
+    ${flexCenter}
     font-size: 40px;
     color: white;
 `;
+
 const Banner = styled.section`
     padding: 0.4rem;
     background: rgba(7,102,166,1);
