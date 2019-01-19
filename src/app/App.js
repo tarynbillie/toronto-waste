@@ -5,7 +5,6 @@ import url from '../util/urls/url';
 import Results from '../components/Results/Results'
 // import _ from 'lodash';
 import './App.css';
-import Favourites from '../components/Results/Favourites';
 import SearchBar from '../components/Search/SearchBar';
 
 
@@ -16,15 +15,15 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleKeyEnter = this.handleKeyEnter.bind(this);
-
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleLocal = this.handleLocal.bind(this);
 
 
     this.state = {
       data: [],
+      favourites: [],
       keyword: '',
       searched: false,
-      favourites: [],
       // htmlString: null,
     }
   }
@@ -36,13 +35,12 @@ class App extends Component {
       .then(resp => resp.json())
       .then(waste => {
         // const htmlString = _.unescape(data[0].body)
-        // const title = data[0].title
-        // console.log(htmlString)
-        // console.log(title)
-        this.setState({ 
-          data: waste, 
+        this.setState({
+          data: waste,
+
           // also get items from favourites
-          favorites: localStorage.getItem('favorites')
+          favourites: localStorage.getItem('favourites') ? JSON.parse(localStorage.getItem('favorites'))
+          : []
         })
       })
       .catch(error => console.log(error))
@@ -52,8 +50,8 @@ class App extends Component {
     const { keyword, searched } = this.state;
 
     if ((keyword.length === 0) & searched) {
-      this.setState({ 
-        searched: false 
+      this.setState({
+        searched: false
       });
     }
   }
@@ -79,7 +77,7 @@ class App extends Component {
 
   // listenser for enter key
 
-  handleKeyEnter = (e) => {
+  handleEnter = (e) => {
     if (e.keyCode === 13) {
       this.handleSearch();
     }
@@ -92,30 +90,51 @@ class App extends Component {
     });
   };
 
+  // changes to local storage
+
+  handleLocal = (item, arr) => {
+    let favourites = localStorage.getItem('favourites')
+      ? JSON.parse(localStorage.getItem('favourites'))
+      : [];
+    if (favourites.includes(item)) {
+      const index = favourites.indexOf(item);
+      favourites.splice(index, 1);
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    } else {
+      favourites.push(item);
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+    }
+    this.setState({
+      favourites 
+    });
+  };
+
 
   render() {
 
-    const { data, keyword, searched } = this.state;
+    const { data, keyword, searched, favourites } = this.state;
 
+    const filtered = data.filter(items =>
+      items.keywords.toLowerCase().includes(keyword && keyword.toLowerCase())
+    );
 
-    for (var i = 0; i < data.length; i++) {
-      console.log(data[i].keywords)
-      if (data[i].keywords === 'salad') {
-
-      }
-    }
-
-   
+    const favouriteItems = data.filter(items => favourites.includes(items.title));
 
 
     return (
-      <div className="App" handleKeyEnter={(e) => this.handleKeyEnter(e)}>
+      <div className="App" handleEnter={(e) => this.handleEnter(e)}>
         <Header />
         <SearchBar handleChange={this.handleChange} handleSearch={this.handleSearch} />
-        <Results data={data} handleChange={this.handleChange} searched={this.state.searched} />
-        <Content className='favourites'>
-          <h2>Favourites</h2>
-        </Content>
+        {keyword.length > 0
+          ? searched && (
+            <Results data={filtered} handleLocal={this.handleLocal} favourites={favourites} />
+          ) : null}
+        {favouriteItems.length > 1 && (
+          <Content className='favourites'>
+            <h2>Favourites</h2>
+            <Results data={favouriteItems} handleLocal={this.handleLocal} favourites={favourites}  />
+          </Content>
+        )}
       </div>
     );
   }

@@ -1,19 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import Mag from '../../assets/searchSvg.js';
-
-
+import PropTypes from 'prop-types'
+import Mag from '../../assets/searchSvg.js'
 
 
 const SearchBar = ({ keyword, handleSearch, handleChange }) => (
 
     <Wrapper>
         <Input type='search' name='keyword' value={keyword} onChange={(e) => handleChange(e)} />
-        <Search  onClick={(e) => handleSearch(e)}>
+        <Search aria-label='search' onClick={(e) => handleSearch(e)}>
             <Mag />
         </Search> 
     </Wrapper>
 );
+
+SearchBar.propTypes = {
+    keyword: PropTypes.string,
+    handleChange: PropTypes.func.isRequired,
+    handleSearch: PropTypes.func.isRequired
+  };
 
 
 export default SearchBar;
@@ -32,6 +37,7 @@ const Wrapper = styled(Flex).attrs({
 
 const Input = styled.input`
     width: 93%;
+    appearance: none;
     height: 2.8rem;
     padding-left: 0.8rem;
     font-size: 18px;
