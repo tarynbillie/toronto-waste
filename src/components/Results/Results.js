@@ -20,8 +20,8 @@ const Results = ({ data, handleLocal, favouritesArray }) => (
 )
 
 const ResContain = styled.div`
-  margin: 1rem 0.8rem;
   width: 97%;
+  padding-left: 1rem;
 `;
 
 export default Results;

@@ -17,25 +17,29 @@ export default class WasteItem extends Component {
         text.innerHTML = html;
         return text.value
     }
-
-
+    
+    svgColor = () => {
+        document.getElementsByClassName('favourite-star').style.fill = 'rgb(0, 148, 89)';
+    }
+    
     render() {
 
-        const { title, body, handleLocal, isFavourite } = this.props;
+        const { title, body, handleLocal, isFavourite, svgColor } = this.props;
+
 
         return (
-            <ResContain>
-                <Title className={isFavourite ? 'isFavourite' : ''} title={title} onClick={(e) => { handleLocal(title) }}>
-                    <Star />
+            <Container className={isFavourite ? 'isFavourite' : ''} title={title} onClick={() => { handleLocal(title) }} >
+                <Title >
+                    <Star onClick={() => {svgColor()}}/>
                     <h1>{title}</h1>
                 </Title>
                 <Body dangerouslySetInnerHTML={{ __html: this.htmlDecode(body) }} />
-            </ResContain>
+            </Container>
         )
     }
 }
 
-const ResContain = styled.div`
+const Container = styled.div`
   width: 100%;
 `;
 
@@ -49,20 +53,18 @@ const Title = styled.button`
     background-color: transparent;
     border: none;
     outline: none;
-
     h1 {
     margin: 0;
     font-weight: normal;
     font-size 18px;
     }
-
     svg {
     fill: #C9C9C9;
     cursor: pointer;
-    :hover, &.isFavourite {
-        fill: rgb(0, 148, 89);
+        :hover {
+            fill: rgb(0, 148, 89);
+        }
     }
-    
 `;
 
 const Body = styled.div`

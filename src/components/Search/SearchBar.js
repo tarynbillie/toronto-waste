@@ -32,7 +32,7 @@ const Wrapper = styled(Flex).attrs({
     justifyContent: 'space-evenly'
 })`
     width: 100%;
-    margin-top: 1rem;
+    margin: 1rem 0;
 `;
 
 const Input = styled.input`

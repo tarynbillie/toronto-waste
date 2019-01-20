@@ -112,20 +112,6 @@ class App extends Component {
 
     const favouriteItems = data.filter(items => favouritesArray.includes(items.title));
 
-    // const ul = document.querySelector('ul');
-    
-    // const liMaker = (text) => {
-    //   const li = document.createElement('li');
-    //   li.textContent = text;
-    //   ul.appendChild(li);
-    // }
-
-    // form.addEventListener('submit', function (e) {
-    //   e.preventDefault();
-    
-    //   liMaker(input.value);
-    //   input.value = "";
-    // });
 
     return (
       <div className="App" handleEnter={(e) => this.handleEnter(e)}>
@@ -151,13 +137,18 @@ const Content = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 1rem;
-    .isFavourite {
-      background-color: rgba(0, 148, 89, 0.1);
+  margin-top: 1rem;
+  background-color: rgba(0, 148, 89, 0.03);
+  button {
+    svg {
+      fill: rgb(0, 148, 89);
     }
+  }
     h2 {
+      padding-left: 1rem;
       color: rgb(0, 148, 89);
     }
+  
 `;
 
 
