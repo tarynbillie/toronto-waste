@@ -10,7 +10,7 @@ const SearchBar = ({ keyword, handleSearch, handleChange }) => (
         <Input type='search' name='keyword' value={keyword} onChange={(e) => handleChange(e)} />
         <Search aria-label='search' onClick={(e) => handleSearch(e)}>
             <Mag />
-        </Search> 
+        </Search>
     </Wrapper>
 );
 
@@ -18,7 +18,7 @@ SearchBar.propTypes = {
     keyword: PropTypes.string,
     handleChange: PropTypes.func.isRequired,
     handleSearch: PropTypes.func.isRequired
-  };
+};
 
 
 export default SearchBar;
@@ -57,13 +57,8 @@ const Search = styled.button`
 
     svg {
         fill: white;
+        width: 100%;
+        height: auto;
         transform: rotate(-270deg);
     }
 `;
-
-// const Mag = styled.svg`
-//     transform: rotate(-270deg);
-//     width: 100%;
-//     height: auto;
-//     fill: white;
-// `;

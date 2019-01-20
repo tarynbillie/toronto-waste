@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import Header from '../components/Header/Header';
-import url from '../util/urls/url';
+import Header from '../components/Header/Header'
+import url from '../util/urls/url'
 import Results from '../components/Results/Results'
-// import _ from 'lodash';
-import './App.css';
-import SearchBar from '../components/Search/SearchBar';
+import SearchBar from '../components/Search/SearchBar'
+// import _ from 'lodash'
+import './App.css'
 
 
 class App extends Component {
@@ -40,7 +40,7 @@ class App extends Component {
 
           // also get items from favourites
           favourites: localStorage.getItem('favourites') ? JSON.parse(localStorage.getItem('favorites'))
-          : []
+            : []
         })
       })
       .catch(error => console.log(error))
@@ -105,7 +105,7 @@ class App extends Component {
       localStorage.setItem('favourites', JSON.stringify(favourites));
     }
     this.setState({
-      favourites 
+      favourites
     });
   };
 
@@ -130,9 +130,9 @@ class App extends Component {
             <Results data={filtered} handleLocal={this.handleLocal} favourites={favourites} />
           ) : null}
         {favouriteItems.length > 1 && (
-          <Content className='favourites'>
+          <Content isFavourite>
             <h2>Favourites</h2>
-            <Results data={favouriteItems} handleLocal={this.handleLocal} favourites={favourites}  />
+            <Results data={favouriteItems} handleLocal={this.handleLocal} favourites={favourites} />
           </Content>
         )}
       </div>
