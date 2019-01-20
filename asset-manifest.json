@@ -1,14 +1,13 @@
 {
-  "main.css": "/toronto-waste/static/css/main.ede19236.chunk.css",
-  "main.js": "/toronto-waste/static/js/main.050362b9.chunk.js",
-  "main.js.map": "/toronto-waste/static/js/main.050362b9.chunk.js.map",
-  "static/js/1.fa92c112.chunk.js": "/toronto-waste/static/js/1.fa92c112.chunk.js",
-  "static/js/1.fa92c112.chunk.js.map": "/toronto-waste/static/js/1.fa92c112.chunk.js.map",
+  "main.css": "/toronto-waste/static/css/main.34e97289.chunk.css",
+  "main.js": "/toronto-waste/static/js/main.5e231b4e.chunk.js",
+  "main.js.map": "/toronto-waste/static/js/main.5e231b4e.chunk.js.map",
+  "static/js/1.52e66359.chunk.js": "/toronto-waste/static/js/1.52e66359.chunk.js",
+  "static/js/1.52e66359.chunk.js.map": "/toronto-waste/static/js/1.52e66359.chunk.js.map",
   "runtime~main.js": "/toronto-waste/static/js/runtime~main.b5945f65.js",
   "runtime~main.js.map": "/toronto-waste/static/js/runtime~main.b5945f65.js.map",
-  "static/media/logo.svg": "/toronto-waste/static/media/logo.5d5d9eef.svg",
-  "static/css/main.ede19236.chunk.css.map": "/toronto-waste/static/css/main.ede19236.chunk.css.map",
+  "static/css/main.34e97289.chunk.css.map": "/toronto-waste/static/css/main.34e97289.chunk.css.map",
   "index.html": "/toronto-waste/index.html",
-  "precache-manifest.fcb43bf6b06407d03447ede242ad3db1.js": "/toronto-waste/precache-manifest.fcb43bf6b06407d03447ede242ad3db1.js",
+  "precache-manifest.3f29323cbbca2aa715d086410ac57134.js": "/toronto-waste/precache-manifest.3f29323cbbca2aa715d086410ac57134.js",
   "service-worker.js": "/toronto-waste/service-worker.js"
 }
