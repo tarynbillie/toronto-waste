@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import WasteItem from './WasteItem'
 
 
-const Results = ({ data, handleLocal, favourites }) => (
+const Results = ({ data, handleLocal, favouritesArray }) => (
 
   <ResContain>
     {data &&
@@ -12,8 +12,8 @@ const Results = ({ data, handleLocal, favourites }) => (
           key={index}
           title={title}
           body={body}
-          handleLocalStorage={handleLocal}
-          isFavourited={favourites && favourites.includes(title)}
+          handleLocal={handleLocal}
+          isFavourite={favouritesArray && favouritesArray.includes(title)}
         />
       ))}
   </ResContain>

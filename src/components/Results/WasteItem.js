@@ -25,8 +25,8 @@ export default class WasteItem extends Component {
 
         return (
             <ResContain>
-                <Title>
-                    <Star className={isFavourite ? 'isFavourite' : ''} title={title} onClick={() => { handleLocal(title) }} />
+                <Title className={isFavourite ? 'isFavourite' : ''} title={title} onClick={(e) => { handleLocal(title) }}>
+                    <Star />
                     <h1>{title}</h1>
                 </Title>
                 <Body dangerouslySetInnerHTML={{ __html: this.htmlDecode(body) }} />
@@ -36,14 +36,14 @@ export default class WasteItem extends Component {
 }
 
 const ResContain = styled.div`
-  margin: 1rem 0.8rem;
-  width: 97%;
+  width: 100%;
 `;
 
 
 const Title = styled.button`
     display: flex;
-    alignItems: 'center';
+    align-items: center;
+    padding: 0;
     width: 50%;
     position: absolute;
     background-color: transparent;

@@ -21,7 +21,7 @@ class App extends Component {
 
     this.state = {
       data: [],
-      favourites: [],
+      favouritesArray: [],
       keyword: '',
       searched: false,
       // htmlString: null,
@@ -37,9 +37,8 @@ class App extends Component {
         // const htmlString = _.unescape(data[0].body)
         this.setState({
           data: waste,
-
           // also get items from favourites
-          favourites: localStorage.getItem('favourites') ? JSON.parse(localStorage.getItem('favorites'))
+          favouritesArray: localStorage.getItem('favourites') ? JSON.parse(localStorage.getItem('favourites'))
             : []
         })
       })
@@ -83,43 +82,50 @@ class App extends Component {
     }
   };
 
-
-  favourite = (e) => {
-    this.setState({
-      isFavourite: true
-    });
-  };
-
   // changes to local storage
 
-  handleLocal = (item, arr) => {
-    let favourites = localStorage.getItem('favourites')
-      ? JSON.parse(localStorage.getItem('favourites'))
-      : [];
-    if (favourites.includes(item)) {
-      const index = favourites.indexOf(item);
-      favourites.splice(index, 1);
-      localStorage.setItem('favourites', JSON.stringify(favourites));
+  handleLocal = (item) => {
+    let favouritesArray = localStorage.getItem('favourites') ? JSON.parse(localStorage.getItem('favourites')) : [];
+    if (favouritesArray.includes(item)) {
+      const index = favouritesArray.indexOf(item);
+      favouritesArray.splice(index, 1);
+      localStorage.setItem('favourites', JSON.stringify(favouritesArray));
     } else {
-      favourites.push(item);
-      localStorage.setItem('favourites', JSON.stringify(favourites));
+      favouritesArray.push(item);
+      localStorage.setItem('favourites', JSON.stringify(favouritesArray));
     }
     this.setState({
-      favourites
+      favouritesArray
     });
   };
+
+
 
 
   render() {
 
-    const { data, keyword, searched, favourites } = this.state;
+    const { data, keyword, searched, favouritesArray } = this.state;
 
     const filtered = data.filter(items =>
       items.keywords.toLowerCase().includes(keyword && keyword.toLowerCase())
     );
 
-    const favouriteItems = data.filter(items => favourites.includes(items.title));
+    const favouriteItems = data.filter(items => favouritesArray.includes(items.title));
 
+    // const ul = document.querySelector('ul');
+    
+    // const liMaker = (text) => {
+    //   const li = document.createElement('li');
+    //   li.textContent = text;
+    //   ul.appendChild(li);
+    // }
+
+    // form.addEventListener('submit', function (e) {
+    //   e.preventDefault();
+    
+    //   liMaker(input.value);
+    //   input.value = "";
+    // });
 
     return (
       <div className="App" handleEnter={(e) => this.handleEnter(e)}>
@@ -127,12 +133,13 @@ class App extends Component {
         <SearchBar handleChange={this.handleChange} handleSearch={this.handleSearch} />
         {keyword.length > 0
           ? searched && (
-            <Results data={filtered} handleLocal={this.handleLocal} favourites={favourites} />
+            <Results data={filtered} handleLocal={this.handleLocal} favouritesArray={favouritesArray} />
           ) : null}
         {favouriteItems.length > 1 && (
           <Content isFavourite>
             <h2>Favourites</h2>
-            <Results data={favouriteItems} handleLocal={this.handleLocal} favourites={favourites} />
+            <Results data={favouriteItems} handleLocal={this.handleLocal} favouritesArray={favouritesArray} />
+            <ul></ul>
           </Content>
         )}
       </div>
@@ -145,7 +152,7 @@ const Content = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-    &.favourites {
+    .isFavourite {
       background-color: rgba(0, 148, 89, 0.1);
     }
     h2 {
