@@ -4,7 +4,6 @@ import Header from '../components/Header/Header'
 import url from '../util/urls/url'
 import Results from '../components/Results/Results'
 import SearchBar from '../components/Search/SearchBar'
-// import _ from 'lodash'
 import './App.css'
 
 
@@ -15,7 +14,7 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleEnter = this.handleEnter.bind(this);
+    this.keyDown = this.keyDown.bind(this);
     this.handleLocal = this.handleLocal.bind(this);
 
 
@@ -24,7 +23,6 @@ class App extends Component {
       favouritesArray: [],
       keyword: '',
       searched: false,
-      // htmlString: null,
     }
   }
 
@@ -34,7 +32,6 @@ class App extends Component {
     fetch(url.torontoWaste)
       .then(resp => resp.json())
       .then(waste => {
-        // const htmlString = _.unescape(data[0].body)
         this.setState({
           data: waste,
           // also get items from favourites
@@ -42,7 +39,7 @@ class App extends Component {
             : []
         })
       })
-      .catch(error => console.log(error))
+    .catch(error => console.log(error))
   }
 
   componentDidUpdate() {
@@ -65,8 +62,16 @@ class App extends Component {
     });
   };
 
-  // changes state in searched - when searched
+  // listener for enter key
 
+  keyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.handleSearch();
+    }
+  };
+  
+  // changes state in searched - when searched
+  
   handleSearch = (e) => {
     e.preventDefault();
     this.setState({
@@ -74,13 +79,6 @@ class App extends Component {
     });
   }
 
-  // listenser for enter key
-
-  handleEnter = (e) => {
-    if (e.keyCode === 13) {
-      this.handleSearch();
-    }
-  };
 
   // changes to local storage
 
@@ -100,8 +98,6 @@ class App extends Component {
   };
 
 
-
-
   render() {
 
     const { data, keyword, searched, favouritesArray } = this.state;
@@ -114,7 +110,7 @@ class App extends Component {
 
 
     return (
-      <div className="App" handleEnter={(e) => this.handleEnter(e)}>
+      <div className="App" keyDown={(e) => this.keyDown(e)}>
         <Header />
         <SearchBar handleChange={this.handleChange} handleSearch={this.handleSearch} />
         {keyword.length > 0
@@ -144,10 +140,10 @@ const Content = styled.section`
       fill: rgb(0, 148, 89);
     }
   }
-    h2 {
-      padding-left: 1rem;
-      color: rgb(0, 148, 89);
-    }
+  h2 {
+    padding-left: 1rem;
+    color: rgb(0, 148, 89);
+  }
   
 `;
 
